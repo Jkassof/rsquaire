@@ -11,21 +11,19 @@ HTMLWidgets.widget({
     return {
 
       renderValue: function(x) {
-//var options = {
-//v		colors: d3.scale.quantize().domain([1,5]).range(['#c9e2f5','#0098db']),
-//v		el: '#' + el.id,
-//v		tooltip: {
-//v		  enabled:true,
-//v		  mode: 'dynamic'
-//v		}
-//v	};
-	var map = new Squaire(x.data, x.options);}
+        var options = {
+		      colors: d3.scale.quantize().domain([1,5]).range(['#c9e2f5','#0098db']),
+		      el: '#' + el.id,
+	      };
+	      var map = new Squaire(x.data, options);
+        
+      }
 
-      resize: function(width, height) {
+     // resize: function(width, height) {
 
         // TODO: code to re-render the widget with a new size
 
-      }
+      //}
 
     };
   }

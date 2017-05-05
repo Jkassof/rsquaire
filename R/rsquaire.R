@@ -5,8 +5,38 @@
 #' @import htmlwidgets
 #'
 #' @export
-rsquaire <- function(data, options, width = NULL, height = NULL, elementId = NULL) {
+rsquaire <- function(data,
+                     index = "value",
+                     indexType = "numeric",
+                     labelStyle = c("short", "full", "ap"),
+                     colors = c("#c9e2f5","#0098db"),
+                     tooltip = TRUE,
+                     column1 = "",
+                     column2 = "",
+                     whitelist = names(data[[1]]),
+                     mode = c("dynamic", "static", "toggle"),
+                     noteIndex = FALSE,
+                     width = NULL, 
+                     height = NULL, 
+                     elementId = NULL) {
 
+  labelStyle = labelStyle[1]
+  mode = mode[1]
+  
+    options <- list(
+      colors = colors,
+      index = index,
+      #labelStyle = labelStyle,
+      tooltip = list(
+        enabled = tooltip,
+        mode = mode,
+        column1 = column1,
+        column2 = column2,
+        whitelist = whitelist,
+        noteIndex = noteIndex
+      )
+    )
+  
   # forward options using x
   x = list(
     data = data,

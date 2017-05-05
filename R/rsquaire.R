@@ -6,6 +6,8 @@
 #'
 #' @export
 rsquaire <- function(data,
+                     keyCol = NULL,
+                     valueCol = NULL,
                      index = "value",
                      indexType = "numeric",
                      labelStyle = c("short", "full", "ap"),
@@ -23,10 +25,18 @@ rsquaire <- function(data,
   labelStyle = labelStyle[1]
   mode = mode[1]
   
+  if (is.list(data)) {
+    cat("You provided a list, creating widget")
+  } else if (is.data.frame(data)) {
+    cat("You provided a data frame, attempting to convert to list")
+  } else {
+    stop("Data must be a list or dataframe")
+  }
+  
     options <- list(
       colors = colors,
       index = index,
-      #labelStyle = labelStyle,
+      labelStyle = labelStyle,
       tooltip = list(
         enabled = tooltip,
         mode = mode,

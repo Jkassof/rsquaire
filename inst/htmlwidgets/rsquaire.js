@@ -12,9 +12,9 @@ HTMLWidgets.widget({
       renderValue: function(x) {
         
        var options = {
-         colors: d3.scale.quantize().domain([1,500]).range(x.options.colors),
+         colors: d3.scale.quantize().domain([1,5]).range(x.options.colors),
 		     el: '#' + el.id,
-		     labelStyle: "short",
+		     labelStyle: x.options.labelStyle,
 		     index: x.options.index,
 		     indexType: x.options.indexType,
 		     tooltip: {
@@ -23,7 +23,7 @@ HTMLWidgets.widget({
 		       column1: x.options.tooltip.column1,
 		       column2: x.options.tooltip.column2,
 		       whitelist: x.options.tooltip.whitelist,
-		       noteIndex: x.options.tooltip.noteIndex
+		       noteIndex: x.options.tooltip.noteIndex,
 		     }
        };
           

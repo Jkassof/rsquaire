@@ -1,6 +1,10 @@
 # rsquaire
-An htmlwidgets implementation of the impressive squaire.js library made by wsj
 
-See [https://github.com/WSJ/squaire](https://github.com/WSJ/squaire) for the JS library
+An R interface for squaire.js, a Javascript library to create responsive equal-area square maps using d3. Default layout is U.S. map but custom layout abilities are being implemented.  
 
-Initial implementation will be for US maps only, with plans to extend functionality for custom maps
+See [https://github.com/WSJ/squaire](https://github.com/WSJ/squaire) for the javascript library.
+
+### Working Issues
+
+- Dataframe input conversion
+- Static tooltip not appearing

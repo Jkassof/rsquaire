@@ -20,7 +20,7 @@ rsquaire <- function(data,
                      noteIndex = FALSE,
                      width = NULL, 
                      height = NULL, 
-                     elementId = NULL) {
+                     elementId = 'map-container') {
 
   labelStyle = labelStyle[1]
   mode = mode[1]
@@ -60,7 +60,7 @@ rsquaire <- function(data,
     width = width,
     height = height,
     package = 'rsquaire',
-    elementId = elementId
+    elementId = 'map-container'
   )
 }
 

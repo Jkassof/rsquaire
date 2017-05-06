@@ -5,15 +5,22 @@ HTMLWidgets.widget({
   type: 'output',
 
   factory: function(el, width, height) {
-
-
+  //  var dummyData = {};
+  //  var map = new Squaire(dummyData, {
+  //    el: el.id,
+  //    tooltip: {
+  //      enabled: true,
+  //      el: "#" + el.id + "-toolbox"
+  //    }
+  //  });
     return {
 
       renderValue: function(x) {
         
+        var data = x.data;
        var options = {
          colors: d3.scale.quantize().domain([1,5]).range(x.options.colors),
-		     el: '#' + el.id,
+		     el: "#map-container",
 		     labelStyle: x.options.labelStyle,
 		     index: x.options.index,
 		     indexType: x.options.indexType,
@@ -24,12 +31,13 @@ HTMLWidgets.widget({
 		       column2: x.options.tooltip.column2,
 		       whitelist: x.options.tooltip.whitelist,
 		       noteIndex: x.options.tooltip.noteIndex,
+		       el:"#map-container-toolbox"
 		     }
        };
           
         // update squaire obect
-       var map = new Squaire(x.data, options);
-        
+      var map = new Squaire(data, options);
+       
       }
 
      // resize: function(width, height) {

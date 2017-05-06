@@ -1,5 +1,9 @@
 # (uncomment to add a dependency)
  dependencies:
+  - name: jquery
+    version: 1.1.1
+    src: htmlwidgets/libs/jquery
+    script: jquery.js
   - name: d3
     version: 3.0
     src: htmlwidgets/libs/d3

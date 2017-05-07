@@ -21,13 +21,13 @@
 rsquaire <- function(data,
                      index = NULL,
                      indexType = "numeric",
-                     labelStyle = c("short", "full", "ap"),
+                     labelStyle = "short",
                      colors = c("#CFF09E","#A8DBA8","#79BD9A","#3B8686","#0B486B"),
                      tooltip = FALSE,
                      column1 = "",
                      column2 = "",
                      whitelist = NULL,
-                     mode = c("dynamic", "static", "toggle"),
+                     mode = "dynamic",
                      noteIndex = NULL,
                      width = NULL, 
                      height = NULL) {
@@ -36,8 +36,8 @@ rsquaire <- function(data,
   assertthat::assert_that(labelStyle %in% c("short", "full", "ap"))
   assertthat::assert_that(mode %in% c("dynamic", "static", "toggle"))
   
-  labelStyle = labelStyle[1]
-  mode = mode[1]
+  labelStyle <- labelStyle[1]
+  mode <- mode[1]
   
   assertthat::assert_that("state" %in% names(data))
   
@@ -47,10 +47,7 @@ rsquaire <- function(data,
   index_max <- max(data[, index])
   
   assertthat::assert_that(is.data.frame(data))
-    stopifnot("state" %in% names(data))
-    cat("Converting data frame to JSON friendly list")
-    data <- tod3list(data)
-  }
+  data <- tod3list(data)
   
     options <- list(
       colors = colors,

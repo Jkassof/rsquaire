@@ -9,8 +9,9 @@ See [https://github.com/WSJ/squaire](https://github.com/WSJ/squaire) for the jav
 
 ### To do
 
-- Static tooltip not appearing
-- Enable custom layouts
+- Static tooltip shiny test
+- Implement custom layouts
+- Add more d3 colorscales functionality
 
 ### Installation
 
@@ -18,11 +19,11 @@ See [https://github.com/WSJ/squaire](https://github.com/WSJ/squaire) for the jav
 devtools::install_github('jkassof/rsquaire')
 ```
 
-#### About
+### About
 
 Squaire.js is a javascript library that lets you make very rich equal-area square maps. You have the ability to pass `rsquare` a dataframe and color the squares by your variable of choice. You can also enable tooltips to give more contextual info as the user hovers over each state.
 
-##### Input
+#### Input
 
 `rsquaire` accepts a dataframe in "wide format." There should be a state column, and a column for each variable you want to include in the chart. These variables can be displayed through coloring or on a tooltip.
 
@@ -36,7 +37,7 @@ stat2 = rnorm(50, 15. 3)
 ```
 
 
-#### Use
+### Use
 
 
 Pass the `rsquaire` function your dataframe, and indicate which column you want to base the coloring on with the `index` arguement.
@@ -59,4 +60,8 @@ rsquaire(wide_data, index = "stat1", tooltip = TRUE)
 
 
 Check out `?rsquaire` for all arguements.
+
+### Attribution
+
+The squaire.js library was created by [Wall Street Journal's Graphics Team](https://github.com/WSJ)
 

@@ -32,20 +32,23 @@ rsquaire <- function(data,
                      width = NULL, 
                      height = NULL) {
 
+  
+  assertthat::assert_that(labelStyle %in% c("short", "full", "ap"))
+  assertthat::assert_that(mode %in% c("dynamic", "static", "toggle"))
+  
   labelStyle = labelStyle[1]
   mode = mode[1]
   
-  whitelist <- dplyr::setdiff(names(data), "state")
+  assertthat::assert_that("state" %in% names(data))
+  
+  if (is.null(whitelist)) whitelist <- dplyr::setdiff(names(data), "state")
+  
   index_min <- min(data[, index])
   index_max <- max(data[, index])
   
-  if (is.list(data)) {
-    cat("You provided a list, creating widget")
-  }
-  
-  if (is.data.frame(data)) {
+  assertthat::assert_that(is.data.frame(data))
     stopifnot("state" %in% names(data))
-    cat("Converting data frame to squaire-friendly list")
+    cat("Converting data frame to JSON friendly list")
     data <- tod3list(data)
   }
   

@@ -21,11 +21,11 @@ devtools::install_github('jkassof/rsquaire')
 
 ### About
 
-Squaire.js is a javascript library that lets you make very rich equal-area square maps. You have the ability to pass `rsquare` a dataframe and color the squares by your variable of choice. You can also enable tooltips to give more contextual info as the user hovers over each state.
+Squaire.js is a javascript library that lets you make very rich equal-area square maps. `rsquaire` is an `htmlwidgets` based R wrapper for that library. Only the default U.S. state map layout is available but custom layouts are coming soon. You pass `rsquaire` a dataframe and tell it which variable you want to color your map by
 
 #### Input
 
-`rsquaire` accepts a dataframe in "wide format." There should be a state column, and a column for each variable you want to include in the chart. These variables can be displayed through coloring or on a tooltip.
+`rsquaire` accepts a dataframe in "wide format." There should be a state column, and a column for each variable you want to include in the graphic. These variables can be displayed through coloring or on a tooltip.
 
 ```
 wide_data <- tibble::tibble(

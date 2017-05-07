@@ -1,30 +1,41 @@
-#' <Add Title>
+#' rsquaire
 #'
-#' <Add Description>
+#' Produces an htmlwidget of a equal-area square cartogram
+#' 
+#' @param data A dataframe in "wide format." One variable of the dataframe will need to be named
+#' 'state' and contain state abbrevations. Each other variable is a statistic about that state.
+#' 
+#' @param index A string which tells rsquaire which variable to use for the map coloring
+#' @param labelStyle A string indicating which type of label to use on the map. Default options are
+#'  "short", "full," and "ap."
+#' @param colors A character vector of color hex codes you want to use for map coloring
+#' @param tooltip A boolean indicating if you want responsive tooltips enabled
+#' @param mode A string indicating which type of tooltip you want
+#' @param column1 A string to label the first column of your tooltip
+#' @param column2 A string to label the second column of your tooltip
+#' @param whitelist A character vector of column names from your dataframe to include in your tooltip
 #'
 #' @import htmlwidgets
 #'
 #' @export
 rsquaire <- function(data,
-                     keyCol = NULL,
-                     valueCol = NULL,
-                     index = "value",
+                     index = NULL,
                      indexType = "numeric",
                      labelStyle = c("short", "full", "ap"),
                      colors = c("#CFF09E","#A8DBA8","#79BD9A","#3B8686","#0B486B"),
                      tooltip = FALSE,
                      column1 = "",
                      column2 = "",
-                     whitelist = names(data[[1]]),
+                     whitelist = NULL,
                      mode = c("dynamic", "static", "toggle"),
                      noteIndex = NULL,
                      width = NULL, 
-                     height = NULL, 
-                     elementId = NULL) {
+                     height = NULL) {
 
   labelStyle = labelStyle[1]
   mode = mode[1]
   
+  whitelist <- dplyr::setdiff(names(data), "state")
   index_min <- min(data[, index])
   index_max <- max(data[, index])
   

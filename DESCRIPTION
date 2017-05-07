@@ -1,9 +1,13 @@
 Package: rsquaire
-Title: What the Package Does (one line, title case)
+Title: Makes responsive equal-area square cartographs
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Jordan", "Kassof", email = "jkassof@gmail.com", role = c("aut", "cre"))
+Description: rsquaire is an htmlwidgets implementation of the javascript library squaire. 
+  rsquaire can create responsive square map data visualizations. Tooltips allow you to provide
+  significantly more contextual information about your map.
 Depends: R (>= 3.3.2)
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.0.1
+Imports: dplyr

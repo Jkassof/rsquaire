@@ -11,26 +11,31 @@ rsquaire <- function(data,
                      index = "value",
                      indexType = "numeric",
                      labelStyle = c("short", "full", "ap"),
-                     colors = c("#c9e2f5","#0098db"),
-                     tooltip = TRUE,
+                     colors = c("#CFF09E","#A8DBA8","#79BD9A","#3B8686","#0B486B"),
+                     tooltip = FALSE,
                      column1 = "",
                      column2 = "",
                      whitelist = names(data[[1]]),
                      mode = c("dynamic", "static", "toggle"),
-                     noteIndex = FALSE,
+                     noteIndex = NULL,
                      width = NULL, 
                      height = NULL, 
-                     elementId = 'map-container') {
+                     elementId = NULL) {
 
   labelStyle = labelStyle[1]
   mode = mode[1]
   
+  index_min <- min(data[, index])
+  index_max <- max(data[, index])
+  
   if (is.list(data)) {
     cat("You provided a list, creating widget")
-  } else if (is.data.frame(data)) {
-    cat("You provided a data frame, attempting to convert to list")
-  } else {
-    stop("Data must be a list or dataframe")
+  }
+  
+  if (is.data.frame(data)) {
+    stopifnot("state" %in% names(data))
+    cat("Converting data frame to squaire-friendly list")
+    data <- tod3list(data)
   }
   
     options <- list(
@@ -50,7 +55,9 @@ rsquaire <- function(data,
   # forward options using x
   x = list(
     data = data,
-    options = options
+    options = options,
+    indexmin = index_min,
+    indexmax = index_max
   )
 
   # create widget
@@ -60,7 +67,7 @@ rsquaire <- function(data,
     width = width,
     height = height,
     package = 'rsquaire',
-    elementId = 'map-container'
+    elementId = "map-container"
   )
 }
 
@@ -90,4 +97,23 @@ rsquaireOutput <- function(outputId, width = '100%', height = '400px'){
 renderRsquaire <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   htmlwidgets::shinyRenderWidget(expr, rsquaireOutput, env, quoted = TRUE)
+}
+
+tod3list <- function(df) {
+  d3data <- vector("list", nrow(df))
+  states <- df[['state']]
+  names(d3data) <- states
+  stat_names <- setdiff(names(df), "state")
+  data <- df[stat_names]
+  
+  for (i in seq_along(states)) {
+    state <- states[i]
+    d3data[[state]] <- vector("list", length(stat_names))
+    names(d3data[[state]]) <- stat_names
+    for(j in seq_along(stat_names)) {
+      stat <- stat_names[j]
+      d3data[[state]][stat] <- data[[i, j]]
+    }
+  }
+  d3data
 }

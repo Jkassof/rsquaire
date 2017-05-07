@@ -5,39 +5,37 @@ HTMLWidgets.widget({
   type: 'output',
 
   factory: function(el, width, height) {
-  //  var dummyData = {};
-  //  var map = new Squaire(dummyData, {
-  //    el: el.id,
-  //    tooltip: {
-  //      enabled: true,
-  //      el: "#" + el.id + "-toolbox"
-  //    }
-  //  });
+    
     return {
 
       renderValue: function(x) {
         
-        var data = x.data;
+//         $(function() {
+//   $("#map-container").eq(0).after("<div id = map-container-toolbox class = squaire// -toolbox></div>");
+// });
+//         
+     
+       var data = x.data;
        var options = {
-         colors: d3.scale.quantize().domain([1,5]).range(x.options.colors),
 		     el: "#map-container",
-		     labelStyle: x.options.labelStyle,
 		     index: x.options.index,
+		     labelStyle: x.options.labelStyle,
+		     colors: d3.scale.quantize().domain([x.indexmin,x.indexmax]).range(x.options.colors),
 		     indexType: x.options.indexType,
 		     tooltip: {
 		       enabled: x.options.tooltip.enabled,
+		       tooltipLayout: false,
 		       mode: x.options.tooltip.mode,
 		       column1: x.options.tooltip.column1,
 		       column2: x.options.tooltip.column2,
 		       whitelist: x.options.tooltip.whitelist,
-		       noteIndex: x.options.tooltip.noteIndex,
-		       el:"#map-container-toolbox"
-		     }
+		       noteIndex: x.options.tooltip.noteIndex
+		       }
        };
           
-        // update squaire obect
-      var map = new Squaire(data, options);
-       
+
+       var carto = new Squaire(data, options);
+      
       }
 
      // resize: function(width, height) {
@@ -45,15 +43,6 @@ HTMLWidgets.widget({
         // TODO: code to re-render the widget with a new size
 
       //}
-
     };
   }
 });
-
-function draw_map(el){
-  var options = {
-		colors: d3.scale.quantize().domain([1,5]).range(['#c9e2f5','#0098db']),
-		el: '#' + el.id
-	};
-	var map = new Squaire(x.data, options);
-}

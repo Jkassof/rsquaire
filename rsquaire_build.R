@@ -40,10 +40,36 @@ names(mapdata)[2:ncol(mapdata)] <- c("2010", "2011", "2012", "2013", "2014", "20
            whitelist = c("2010", "2014", "2016"))
 
   
-#rsquaire(data)
 
-
-## ideal function call
-
-# rsquaire(data, colors = c("#c9e2f5","#0098db"), tooltip = TRUE)
-
+  
+  
+### custom layout
+  
+  
+  custom_layout <- ",N,\nW,,E\n,S,"
+  
+  custom_labels <- list(
+    N = list(full = "North", short = "N"),
+    E = list(full = "East", short = "E"),
+    S = list(full = "South", short = "S"),
+    W = list(full = "West", short = "W")
+  )
+  
+  custom_data <- list(
+    N = list(Direction = "Longitude", `Fun Fact` = "Compasses love me", note = "Also, the north star."),
+    E = list(Direction = "Latitude", `Fun Fact` = "Where the sun rises"),
+    S = list(Direction = "Longitude", `Fun Fact` = "Penguin citaaayy"),
+    W = list(Direction = "Latitude", `Fun Fact` = "Sun goes bye-bye here")
+  ) 
+  
+  cats <- c("Longitude", "Latitude")
+  
+  rsquaire(custom_data, 
+           index = "Direction", 
+           indexType = "string",
+           categories = cats, 
+           layout = custom_layout, 
+           labels = custom_labels,
+           colors = c("#c9e2f5","#c6e2ba"),
+           labelStyle = "full")
+  

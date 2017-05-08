@@ -4,10 +4,12 @@
 \alias{rsquaire}
 \title{rsquaire}
 \usage{
-rsquaire(data, index = NULL, indexType = "numeric", labelStyle = "short",
+rsquaire(data, index = NULL, indexType = "numeric", categories = NULL,
+  layout = NULL, labels = NULL, labelStyle = "short",
   colors = c("#CFF09E", "#A8DBA8", "#79BD9A", "#3B8686", "#0B486B"),
   tooltip = FALSE, column1 = "", column2 = "", whitelist = NULL,
-  mode = "dynamic", noteIndex = NULL, width = NULL, height = NULL)
+  mode = "dynamic", noteIndex = NULL, width = NULL, height = NULL,
+  elementId = "map-container")
 }
 \arguments{
 \item{data}{A dataframe in "wide format." One variable of the dataframe will need to be named

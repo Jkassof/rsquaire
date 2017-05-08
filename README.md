@@ -10,8 +10,10 @@ See [https://github.com/WSJ/squaire](https://github.com/WSJ/squaire) for the Jav
 ### To do
 
 - Static tooltip shiny test
-- Implement custom layouts
-- Add more d3 colorscales functionality
+- ~~Implement custom layouts~~
+    - NSEW custom working
+- ~~Add more d3 colorscales functionality~~
+    - Added quantize and ordinal scales. Still need quantiles
 
 ### Installation
 

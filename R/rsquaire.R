@@ -21,6 +21,9 @@
 rsquaire <- function(data,
                      index = NULL,
                      indexType = "numeric",
+                     categories = NULL,
+                     layout = NULL,
+                     labels = NULL,
                      labelStyle = "short",
                      colors = c("#CFF09E","#A8DBA8","#79BD9A","#3B8686","#0B486B"),
                      tooltip = FALSE,
@@ -30,7 +33,8 @@ rsquaire <- function(data,
                      mode = "dynamic",
                      noteIndex = NULL,
                      width = NULL, 
-                     height = NULL) {
+                     height = NULL,
+                     elementId = "map-container") {
 
   
   assertthat::assert_that(labelStyle %in% c("short", "full", "ap"))
@@ -39,19 +43,26 @@ rsquaire <- function(data,
   labelStyle <- labelStyle[1]
   mode <- mode[1]
   
-  assertthat::assert_that("state" %in% names(data))
+  #assertthat::assert_that("state" %in% names(data)) # make this work for lists too
   
   if (is.null(whitelist)) whitelist <- dplyr::setdiff(names(data), "state")
   
-  index_min <- min(data[, index])
-  index_max <- max(data[, index])
+  if (indexType == "numeric") {
+    index_min <- min(data[, index])
+    index_max <- max(data[, index])
+  } else {
+    index_min <- NULL
+    index_max <- NULL
+  }
   
-  assertthat::assert_that(is.data.frame(data))
-  data <- tod3list(data)
+  if (is.data.frame(data)) data <- tod3list(data)
   
     options <- list(
       colors = colors,
       index = index,
+      indexType = indexType,
+      layout = layout,
+      labels = labels,
       labelStyle = labelStyle,
       tooltip = list(
         enabled = tooltip,
@@ -68,7 +79,8 @@ rsquaire <- function(data,
     data = data,
     options = options,
     indexmin = index_min,
-    indexmax = index_max
+    indexmax = index_max,
+    categories = categories
   )
 
   # create widget

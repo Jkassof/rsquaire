@@ -13,28 +13,39 @@ library(rsquaire)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   # Application title
-  titlePanel("rsquaire demo"),
-  tags$style("svg {
-  float: left;
-             }"),
-    rsquaireOutput("rsquairetest")
+  titlePanel("Shiny rsquaire demo"),
+
+  sidebarLayout(
+    sidebarPanel("Inputs Here"),
+    mainPanel(
+      rsquaireOutput("rsquairetest", width = "90%")
+  )
+)
 )
 
-dfdata <- tibble::tibble(
-  state = rep(c("NY", "AL", "CA"), 2),
-  type = c(rep("stat1", 3), rep("stat2", 3)),
-  val = c(rnorm(3, 100, 15), rnorm(3, 1000, 17))
-)
+dat <- readr::read_csv("https://www2.census.gov/programs-surveys/popest/datasets/2010-2016/national/totals/nst-est2016-alldata.csv") %>%
+  select(NAME, contains("popestimate"))
 
-widedf <- dfdata %>% tidyr::spread(type, val)
+states <- tibble::tibble(NAME =state.name, state = state.abb)
+
+mapdata <- dat %>%
+  left_join(states, by = "NAME") %>%
+  select(state, contains("popestimate")) %>%
+  filter(complete.cases(.))
+
+names(mapdata)[2:ncol(mapdata)] <- c("2010", "2011", "2012", "2013", "2014", "2015", "2016")
+
 
 server <- function(input, output) {
   output$rsquairetest <-
     renderRsquaire(rsquaire(
-      widedf,
-      index = "stat1",
+      mapdata,
       tooltip = TRUE,
-      mode = "static"
+      mode = "static",
+      index = "2016",
+      column1 = "Year",
+      column2 = "Population",
+      colors = c('#e6eff9','#c9e2f5','#95cbee','#0098db','#0079ae')
     ))
   
 }

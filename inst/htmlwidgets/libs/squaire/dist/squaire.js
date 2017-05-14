@@ -412,9 +412,11 @@
 
 		this.svg.attr({
 			"width": this.width,
-			"height": this.height
+			"height": this.height,
+			"style": "float:left;"
 		});
 		
+
 		//making default here so references correct options
 		var tooltipDefaultLayout = function(d) {
 				var html = '<h6>'+self.options.labels[d.box].full+'</h6>' + '<table class="table">';

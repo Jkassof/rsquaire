@@ -90,8 +90,7 @@ rsquaire <- function(data,
     width = width,
     height = height,
     package = 'rsquaire',
-    elementId = "map-container"
-  )
+    elementId = elementId)
 }
 
 #' Shiny bindings for rsquaire
@@ -112,7 +111,10 @@ rsquaire <- function(data,
 #'
 #' @export
 rsquaireOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'rsquaire', width, height, package = 'rsquaire')
+  tags$div(
+    htmlwidgets::shinyWidgetOutput(outputId, 'rsquaire', width, height, package = 'rsquaire'),
+    tags$div(id = paste0(outputId, "-toolbox"))
+  )
 }
 
 #' @rdname rsquaire-shiny
@@ -140,3 +142,4 @@ tod3list <- function(df) {
   }
   d3data
 }
+

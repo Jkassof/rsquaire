@@ -16,7 +16,7 @@ dfdata <- tibble::tibble(
   val = c(rnorm(3, 100, 15), rnorm(3, 1000, 17))
 )
 
-widedf <- dfdata %>% spread(type, val)
+widedf <- dfdata %>% tidyr::spread(type, val)
 
 
 dat <- readr::read_csv("https://www2.census.gov/programs-surveys/popest/datasets/2010-2016/national/totals/nst-est2016-alldata.csv") %>%

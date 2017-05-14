@@ -11,5 +11,5 @@
   - name: squaire
     version: 0.1
     src: htmlwidgets/libs/squaire/dist
-    script: squaire.min.js
+    script: squaire.js
     stylesheet: squaire.min.css

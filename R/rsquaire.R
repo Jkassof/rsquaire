@@ -113,7 +113,10 @@ rsquaire <- function(data,
 rsquaireOutput <- function(outputId, width = '100%', height = '400px'){
   tags$div(
     htmlwidgets::shinyWidgetOutput(outputId, 'rsquaire', width, height, package = 'rsquaire'),
-    tags$div(id = paste0(outputId, "-toolbox"))
+    tags$div(id = paste0(outputId, "-toolbox"),
+             style = paste0("width:", width, 
+                            ";height:", height,
+                            ";padding-top:5px;"))
   )
 }
 

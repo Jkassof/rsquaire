@@ -5,7 +5,6 @@ HTMLWidgets.widget({
   type: 'output',
 
   factory: function(el, width, height) {
-    
     return {
 
       renderValue: function(x) {
@@ -17,8 +16,7 @@ var labels = x.options.labels || {'AK': {'full': 'Alaska', 'short': 'AK', 'ap': 
 
 var colorscale = d3.scale.quantize().domain([x.indexmin, x.indexmax]).range(x.options.colors);
 
-if(x.options.indexType == "string")
-{
+if(x.options.indexType == "string") {
   colorscale = d3.scale.ordinal().domain(x.categories).range(x.options.colors);
 }  
 
@@ -43,15 +41,15 @@ if(x.options.indexType == "string")
 		       }
        };
 
-  var carto = new Squaire(x.data, options);
-        
+      carto = new Squaire(x.data, options);
+      },
+
+      resize: function(width, height) {
+
+        carto.resizeMap();
+
       }
-
-     // resize: function(width, height) {
-
-        // TODO: code to re-render the widget with a new size
-
-      //}
+      
     };
   }
 });

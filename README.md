@@ -19,7 +19,7 @@ devtools::install_github('jkassof/rsquaire')
 
 ### About
 
-Squaire.js is a JavaScript library that lets you make very rich equal-area square maps. `rsquaire` is an `htmlwidgets` based R wrapper for that library. Only the default U.S. state map layout is available but custom layouts are coming soon. There is a basic intro below, but checkout the [rsquaire website](www.jkassof.com/rsquaire) for detailed examples.
+Squaire.js is a JavaScript library that lets you make very rich equal-area square maps. `rsquaire` is an `htmlwidgets` based R wrapper for that library. Only the default U.S. state map layout is available but custom layouts are coming soon. There is a basic intro below, but checkout the [rsquaire website](http://www.jkassof.com/rsquaire) for detailed examples.
 
 ### Input
 

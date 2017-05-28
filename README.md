@@ -9,11 +9,7 @@ See [https://github.com/WSJ/squaire](https://github.com/WSJ/squaire) for the Jav
 
 ### To do
 
-- Static tooltip shiny test
-- ~~Implement custom layouts~~
-    - NSEW custom working
-- ~~Add more d3 colorscales functionality~~
-    - Added quantize and ordinal scales. Still need quantiles
+- Custom html tooltip layouts
 
 ### Installation
 
@@ -23,7 +19,7 @@ devtools::install_github('jkassof/rsquaire')
 
 ### About
 
-Squaire.js is a JavaScript library that lets you make very rich equal-area square maps. `rsquaire` is an `htmlwidgets` based R wrapper for that library. Only the default U.S. state map layout is available but custom layouts are coming soon. 
+Squaire.js is a JavaScript library that lets you make very rich equal-area square maps. `rsquaire` is an `htmlwidgets` based R wrapper for that library. Only the default U.S. state map layout is available but custom layouts are coming soon. There is a basic intro below, but checkout the [rsquaire website](www.jkassof.com/rsquaire) for detailed examples.
 
 ### Input
 

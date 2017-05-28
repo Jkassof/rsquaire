@@ -11,7 +11,7 @@
 
 
 
-<title>layout</title>
+<title>Custom Layout Example</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,6 +22,11 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<script src="site_libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<script src="site_libs/d3-3/d3.min.js"></script>
+<link href="site_libs/squaire-0.1/squaire.min.css" rel="stylesheet" />
+<script src="site_libs/squaire-0.1/squaire.js"></script>
+<script src="site_libs/rsquaire-binding-0.0.0.9000/rsquaire.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -188,6 +193,24 @@ $(document).ready(function () {
 <li>
   <a href="layout.html">Custom Layout</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    More
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://github.com/WSJ/squaire">squaire.js</a>
+    </li>
+    <li>
+      <a href="http://www.jkassof.com">My website</a>
+    </li>
+    <li>
+      <a href="http://www.github.com/jkassof">My Github</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -200,12 +223,63 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">layout</h1>
+<h1 class="title toc-ignore">Custom Layout Example</h1>
 
 </div>
 
 
-<p>custom tooltip</p>
+<style>
+  g.active text {
+    font-size: 150% !important;
+    fill: #800000 !important;
+    font-weight: 600px;
+  }
+
+</style>
+<p>Below is an example using a simple custom layout. Custom layouts are implemented using a CSV-style string. This example uses a basic North-East-South-West grid. A custom layout will also require accompanying custom labels.</p>
+<pre class="r"><code>library(rsquaire)
+
+# Create some data about each cardinal direction
+custom_data &lt;- 
+  tibble::tribble(
+    ~state, ~Direction, ~`Fun Fact`, ~Note, 
+    &quot;N&quot;, &quot;Longitude&quot;, &quot;Compasses are attracted to me&quot;, &quot;AKA Polaris!!&quot;,
+    &quot;E&quot;, &quot;Latitude&quot;, &quot;The Sun rises here...mostly&quot;, &quot;&quot;,
+    &quot;S&quot;, &quot;Longitude&quot;, &quot;Penguins on penguins on penguins&quot;, &quot;&quot;,
+    &quot;W&quot;, &quot;Latitude&quot;, &quot;Where the Sun goes to bed&quot;, &quot;&quot;
+  )
+
+# Create accompanying custom labels, full and short are required
+custom_labels &lt;- 
+  list(
+    N = list(full = &quot;North&quot;, short = &quot;N&quot;),
+    E = list(full = &quot;East&quot;, short = &quot;E&quot;),
+    S = list(full = &quot;South&quot;, short = &quot;S&quot;),
+    W = list(full = &quot;West&quot;, short = &quot;W&quot;)
+  )
+
+# These are the categories for my string index, they&#39;ll be assigned colors in order
+custom_cats &lt;- c(&quot;Longitude&quot;, &quot;Latitude&quot;)
+custom_colors &lt;- c(&quot;#c9e2f5&quot;,&quot;#c6e2ba&quot;)
+custom_layout &lt;- &quot;,N,\nW,,E\n,S,&quot;
+ 
+rsquaire(custom_data, 
+         index      = &quot;Direction&quot;, 
+         indexType  = &quot;string&quot;,
+         categories = custom_cats, 
+         layout     = custom_layout, 
+         labels     = custom_labels,
+         colors     = custom_colors,
+         labelStyle = &quot;full&quot;,
+         whitelist = c(&quot;Direction&quot;, &quot;Fun Fact&quot;),
+         noteIndex = &quot;Note&quot;,
+         tooltip    = TRUE,
+         mode       = &quot;static&quot;,
+         width      = &quot;500px&quot;,
+         height     = &quot;500px&quot;)</code></pre>
+<div id="map-container" style="width:500px;height:500px;" class="rsquaire html-widget"></div>
+<script type="application/json" data-for="map-container">{"x":{"data":{"N":{"Direction":"Longitude","Fun Fact":"Compasses are attracted to me","Note":"AKA Polaris!!"},"E":{"Direction":"Latitude","Fun Fact":"The Sun rises here...mostly","Note":""},"S":{"Direction":"Longitude","Fun Fact":"Penguins on penguins on penguins","Note":""},"W":{"Direction":"Latitude","Fun Fact":"Where the Sun goes to bed","Note":""}},"options":{"colors":["#c9e2f5","#c6e2ba"],"index":"Direction","indexType":"string","layout":",N,\nW,,E\n,S,","labels":{"N":{"full":"North","short":"N"},"E":{"full":"East","short":"E"},"S":{"full":"South","short":"S"},"W":{"full":"West","short":"W"}},"labelStyle":"full","tooltip":{"enabled":true,"mode":"static","column1":"","column2":"","whitelist":["Direction","Fun Fact"],"noteIndex":"Note"}},"indexmin":null,"indexmax":null,"categories":["Longitude","Latitude"]},"evals":[],"jsHooks":[]}</script>
+<div id="map-container-toolbox" style="width:500px;height:200px;"></div>
 
 
 

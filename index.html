@@ -188,6 +188,24 @@ $(document).ready(function () {
 <li>
   <a href="layout.html">Custom Layout</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    More
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://github.com/WSJ/squaire">squaire.js</a>
+    </li>
+    <li>
+      <a href="http://www.jkassof.com">My website</a>
+    </li>
+    <li>
+      <a href="http://www.github.com/jkassof">My Github</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -204,7 +222,33 @@ $(document).ready(function () {
 </div>
 
 
-<p>home page</p>
+<p align="center">
+<img src="img/rsquarelogo.png">
+</p>
+<p>An R interface for squaire.js, a JavaScript library to create responsive equal-area square maps using d3. Default layout is U.S. map but custom layout abilities are being implemented.</p>
+<p>See <a href="https://github.com/WSJ/squaire" class="uri">https://github.com/WSJ/squaire</a> for the JavaScript library.</p>
+<div id="to-do" class="section level3">
+<h3>To do</h3>
+<ul>
+<li>Static tooltip shiny test</li>
+<li><del>Implement custom layouts</del>
+<ul>
+<li>NSEW custom working</li>
+</ul></li>
+<li><del>Add more d3 colorscales functionality</del>
+<ul>
+<li>Added quantize and ordinal scales. Still need quantiles</li>
+</ul></li>
+</ul>
+</div>
+<div id="installation" class="section level3">
+<h3>Installation</h3>
+<pre><code>devtools::install_github(&#39;jkassof/rsquaire&#39;)</code></pre>
+</div>
+<div id="about" class="section level3">
+<h3>About</h3>
+<p>Squaire.js is a JavaScript library that lets you make very rich equal-area square maps. <code>rsquaire</code> is an <code>htmlwidgets</code> based R wrapper for that library. Only the default U.S. state map layout is available but custom layouts are coming soon.</p>
+</div>
 
 
 

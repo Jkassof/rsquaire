@@ -23,6 +23,7 @@ rsquaire <- function(data,
                      indexType = "numeric",
                      categories = NULL,
                      layout = NULL,
+                     layout_key = "state",
                      labels = NULL,
                      labelStyle = "short",
                      colors = c("#CFF09E","#A8DBA8","#79BD9A","#3B8686","#0B486B"),
@@ -43,9 +44,7 @@ rsquaire <- function(data,
   labelStyle <- labelStyle[1]
   mode <- mode[1]
   
-  #assertthat::assert_that("state" %in% names(data)) # make this work for lists too
-  
-  if (is.null(whitelist)) whitelist <- dplyr::setdiff(names(data), "state")
+  if (is.null(whitelist)) whitelist <- dplyr::setdiff(names(data), layout_key)
   
   if (indexType == "numeric") {
     index_min <- min(data[, index])
@@ -55,7 +54,7 @@ rsquaire <- function(data,
     index_max <- NULL
   }
   
-  if (is.data.frame(data)) data <- tod3list(data)
+  if (is.data.frame(data)) data <- tod3list(data, layout_key)
   
     options <- list(
       colors = colors,
@@ -71,7 +70,7 @@ rsquaire <- function(data,
         column2 = column2,
         whitelist = whitelist,
         noteIndex = noteIndex
-      )
+        )
     )
   
   # forward options using x
@@ -127,20 +126,20 @@ renderRsquaire <- function(expr, env = parent.frame(), quoted = FALSE) {
   htmlwidgets::shinyRenderWidget(expr, rsquaireOutput, env, quoted = TRUE)
 }
 
-tod3list <- function(df) {
+tod3list <- function(df, layout_key) {
   d3data <- vector("list", nrow(df))
-  states <- df[['state']]
-  names(d3data) <- states
-  stat_names <- setdiff(names(df), "state")
+  keys <- df[[layout_key]]
+  names(d3data) <- keys
+  stat_names <- setdiff(names(df), layout_key)
   data <- df[stat_names]
   
-  for (i in seq_along(states)) {
-    state <- states[i]
-    d3data[[state]] <- vector("list", length(stat_names))
-    names(d3data[[state]]) <- stat_names
+  for (i in seq_along(keys)) {
+    key <- keys[i]
+    d3data[[key]] <- vector("list", length(stat_names))
+    names(d3data[[key]]) <- stat_names
     for(j in seq_along(stat_names)) {
       stat <- stat_names[j]
-      d3data[[state]][stat] <- data[[i, j]]
+      d3data[[key]][stat] <- data[[i, j]]
     }
   }
   d3data

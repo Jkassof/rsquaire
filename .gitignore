@@ -4,3 +4,4 @@
 .Ruserdata
 rsquaire_build.R
 README.html
+*.Rbuildignore

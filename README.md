@@ -3,13 +3,9 @@
   <img src="img/rsquarelogo.png">
 </p>
 
-An R interface for squaire.js, a JavaScript library to create responsive equal-area square maps using d3. Default layout is U.S. map but custom layout abilities are being implemented.  
+An R interface for squaire.js, a JavaScript library to make responsive equal-area square maps using d3. The default layout of squares is a U.S. map. You can color the squares based on a variable, and create tooltips to provide more info. The [rsquaire website](http://jkassof.com/rsquaire) has a few examples that demonstrate the features available in `rsquaire`.
 
-See [https://github.com/WSJ/squaire](https://github.com/WSJ/squaire) for the JavaScript library.
-
-### To do
-
-- Custom html tooltip layouts
+The Javascript library was created by [Wall Street Journal's Graphics Team](https://github.com/WSJ)
 
 ### Installation
 
@@ -17,20 +13,16 @@ See [https://github.com/WSJ/squaire](https://github.com/WSJ/squaire) for the Jav
 devtools::install_github('jkassof/rsquaire')
 ```
 
-### About
-
-Squaire.js is a JavaScript library that lets you make very rich equal-area square maps. `rsquaire` is an `htmlwidgets` based R wrapper for that library. See [the rsquaire website](http://jkassof.com/rsquaire) for a number of examples that demonstrate the wide range of customization available in `rsquaire`.
-
-
 ### Input
 
-`rsquaire` accepts a dataframe in wide format. There should be a state column, and a column for each variable you want to include in the graphic. These variables can be displayed through coloring or on a tooltip.
+`rsquaire` accepts a dataframe in wide format. If using the default layout, there needs to be a "state" column, and a column for each variable you want to have available to the widget. These variables can be displayed through coloring or on a tooltip.
 
 ```
-wide_data <- tibble::tibble(
-state = state.abb,
-stat1 = rnorm(50, 50, 15),
-stat2 = rnorm(50, 15. 3)
+wide_data <- data.frame(
+  state = state.abb,
+  var1 = rnorm(50, 50, 15),
+  var2 = rnorm(50, 15. 3),
+  var3 = c("Rep", "Dem", "Dem")
 )
 
 ```
@@ -39,23 +31,23 @@ stat2 = rnorm(50, 15. 3)
 ### Use
 
 
-Pass the `rsquaire` function your dataframe, and indicate which column you want to base the coloring on with the `index` argument.
+`index` is the only required argument as it tells `rsquaire` which variable to color the squares by. See `?rsquaire` for details of all argument.
 
 ```
 rsquaire(wide_data, index = "stat1")
 ```
 
-![](img/rsquaire.png)
+<img src='img/rsquaire.png' width = "400">
 
 <br><br>
 
-You can include the other variables from your input data with tooltips. Use the `tooltip` argument to enable them. `whitelist` tells the widget which variables to include on the tooltip, by default it will include all columns except 'state.'
+To include other variables, enabled tooltips with the `tooltip` argument. `whitelist` tells the widget which variables to include in the tooltip, by default it will include all columns except "state."
 
 ```
 rsquaire(wide_data, index = "stat1", tooltip = TRUE)
 ```
 
-![](img/tooltips.png)
+<img src = 'img/tooltips.png' width = "400")
 
 
 Check out `?rsquaire` for all arguments.
@@ -64,3 +56,6 @@ Check out `?rsquaire` for all arguments.
 
 The squaire.js library was created by [Wall Street Journal's Graphics Team](https://github.com/WSJ)
 
+### To do
+
+- Custom html tooltip layouts

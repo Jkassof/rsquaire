@@ -37,7 +37,7 @@ wide_data <- data.frame(
 rsquaire(wide_data, index = "stat1")
 ```
 
-<img src='img/rsquaire.png' width = "400">
+<img src='img/rsquaire.png' width = "500">
 
 <br><br>
 
@@ -47,7 +47,7 @@ To include other variables, enabled tooltips with the `tooltip` argument. `white
 rsquaire(wide_data, index = "stat1", tooltip = TRUE)
 ```
 
-<img src = 'img/tooltips.png' width = "400")
+<img src = 'img/tooltips.png' width = "500">
 
 
 Check out `?rsquaire` for all arguments.
